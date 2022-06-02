@@ -1,0 +1,228 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Introdução ao SOLID",
+        "description": "API da introdução ao SOLID",
+        "version": "1.0.0",
+        "contact": {
+            "email": "victormedeiros.pj@gmail.com"
+        }
+    },
+    "paths": {
+       "/users": {
+           "post": {
+               "tags": ["Users"],
+               "summary": "Criar um usuário",
+               "description": "Criar um novo usuário",
+               "requestBody": {
+                   "content": {
+                       "application/json": {
+                           "schema": {
+                               "type": "object",
+                               "properties": {
+                                   "name": "string",
+                                   "email": "string"
+                               },
+                               "example": {
+                                   "name": "Victor",
+                                   "email": "victor@gmail.com"
+                               }
+                           }
+                       }
+                   }
+               },
+               "responses": {
+                   "201": {
+                       "description": "Criado",
+                       "content":{
+                        "application/json": {
+                            "schema":{
+                                "type": "object", 
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "admin": {
+                                            "type": "boolean"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "created_at": {
+                                        "type": "string"
+                                    },
+                                    "updated_at": {
+                                        "type": "string"
+                                    }
+                                
+                                }
+                            }
+                        }
+                    }    
+           
+                   },
+                   "400": {
+                       "description": "Já existe um usuário com esse e-mail."
+                   }
+               }
+           },
+           "get": {
+               "tags": ["Users"],
+               "summary": "Listar os usuários",
+               "description": "Listar todos os usuários",
+               "parameters":[
+                   {
+                       "name": "user_id",
+                       "in": "header",
+                       "required": "true"
+                    }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "Sucesso",
+                       "content":{
+                           "application/json": {
+                               "schema":{
+                                   "type": "array",
+                                   "items": {
+                                       "type": "object",
+                                       "properties": {
+                                           "id": {
+                                               "type": "string"
+                                           },
+                                           "admin": {
+                                                "type": "boolean"
+                                           },
+                                           "name": {
+                                               "type": "string"
+                                           },
+                                           "email": {
+                                               "type": "string"
+                                           },
+                                           "created_at": {
+                                               "type": "string"
+                                           },
+                                           "updated_at": {
+                                               "type": "string"
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       }    
+                      
+                   },
+                   "400": {
+                       "description": "Você não tem permissão para executar esta ação."
+                   },
+                   "404": {
+                    "description": "Usuário não encontrado."
+                }
+               }
+           }
+       } ,
+       "/users/{userId}": {
+        "get": {
+            "tags": ["Users"],
+            "summary": "Buscar um usuário",
+            "description": "Buscar as informações de um usuário",
+            "parameters":[
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": "true"
+                 }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Sucesso",
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                             "type": "boolean"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                }
+                            }
+                        }
+                    }    
+                   
+                },
+                "404": {
+                 "description": "Usuário não encontrado."
+             }
+            }
+        }
+       },
+       "/users/{userId}/admin": {
+           "patch": {
+            "tags": ["Users"],
+            "summary": "Tornar o usuário admin.",
+            "description": "Tornar o usuário admin.",
+            "parameters":[
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": "true"
+                 }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Sucesso",
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                             "type": "boolean"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                }
+                            }
+                        }
+                    }    
+                   
+                },
+                "404": {
+                 "description": "Usuário não encontrado."
+             }
+            }
+        }
+       }
+    }
+}
